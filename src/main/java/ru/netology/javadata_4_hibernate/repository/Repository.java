@@ -7,12 +7,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
-public class Repository {
+public class PersonRepository {
     @PersistenceContext
-    private EntityManager manager;
+    private EntityManager entityManager;
 
     public List<Person> getPersonsByCity(String city) {
-        return manager.createQuery("SELECT p FROM Person p WHERE p.city_of_living = :city")
-                .setParameter("city",city).getResultList();
+        return entityManager.createQuery("SELECT p FROM Person p WHERE p.cityOfLiving = :city", Person.class)
+                .setParameter("city", city)
+                .getResultList();
     }
 }
